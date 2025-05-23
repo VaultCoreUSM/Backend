@@ -1,0 +1,9 @@
+fastapi>=0.100.0
+uvicorn[standard]>=0.20.0
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0 # Adaptador PostgreSQL
+pydantic-settings>=2.0.0
+python-dotenv>=1.0.0
+# opencv-python-headless # Para procesamiento de video, si lo necesitas
+# numpy # Para OpenCV y manipulación de imágenes
+# alembic # Para migraciones de base de datos (recomendado para producción)
