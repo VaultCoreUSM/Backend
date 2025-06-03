@@ -17,6 +17,7 @@ COPY requirements.txt .
 # Instala las dependencias de Python.
 RUN pip install --no-cache-dir -r requirements.txt
 
+
 # Copia el resto del código de la aplicación al directorio de trabajo (/app/).
 # Esto incluye tu directorio 'app/' con todo el código fuente.
 COPY ./app /app/app
