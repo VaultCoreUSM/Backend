@@ -2,9 +2,13 @@
 import jinja2 
 import pdfkit
 import os 
-import datetime
+from datetime import datetime
+import pdb
+import regex
 
-def crear_pdf(dato):
+
+
+def crear_pdf(dato, entrada="reporte"):
     try:
         windows = "/usr/bin/wkhtmltopdf"
         ruta_actual = os.getcwd()
@@ -15,7 +19,7 @@ def crear_pdf(dato):
 
         ruta_base = os.getcwd()
         ruta_plantilla = os.path.join(ruta_base, "app", "automatizacion", "plantilla")
-        ruta_salida = os.path.join(ruta_base, "app", "automatizacion","reporte","reporte.pdf")
+        ruta_salida = os.path.join(ruta_base, "app", "automatizacion","reporte",f"{entrada}.pdf")
 
         env=jinja2.Environment(loader=jinja2.FileSystemLoader(ruta_plantilla))
         print(env)
@@ -35,9 +39,15 @@ def crear_pdf(dato):
 
 
         pdfkit.from_string(html,ruta_salida,configuration=config)
-        return [True,""]
+        return [True,ruta_salida]
     except  Exception as e:
         return [False,e]
         
 
 #Fechas
+
+
+#Archivos
+
+
+#
