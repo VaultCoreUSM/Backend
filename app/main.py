@@ -41,6 +41,13 @@ app.add_middleware(
 # Incluir el router de la API v1
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
+@app.get("/generar_reporte")
+def generar_reporte():
+    ruta = generar()
+    return {"mensaje": "Reporte generado exitosamente", "archivo": ruta}
+
+
+
 @app.get("/", tags=["Root"])
 async def read_root():
     return {"message": f"Welcome to {settings.PROJECT_NAME}!"}

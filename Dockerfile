@@ -1,31 +1,33 @@
-# backend/Dockerfile
+# Usa una imagen base de Python más compatible
+FROM python:3.13-slim
 
-# Usa una imagen base oficial de Python.
-FROM python:3.13-alpine
-
-# Establece el directorio de trabajo dentro del contenedor.
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# (Opcional) Instala dependencias del sistema si fueran necesarias.
-# Para psycopg2-binary, usualmente no se necesitan dependencias de compilación.
-# Si usaras psycopg2 (no binary), necesitarías algo como:
-# RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+# Instala herramientas del sistema necesarias
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    wkhtmltopdf \
+    build-essential \
+    curl \
+    libxrender1 \
+    libxtst6 \
+    libjpeg-dev \
+    libfontconfig1 \
+    libx11-dev \
+    libgl1 \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copia el archivo de requerimientos primero para aprovechar el cache de Docker.
+# Copia el archivo de requerimientos y los instala
 COPY requirements.txt .
-
-# Instala las dependencias de Python.
 RUN pip install --no-cache-dir -r requirements.txt
 
-
-# Copia el resto del código de la aplicación al directorio de trabajo (/app/).
-# Esto incluye tu directorio 'app/' con todo el código fuente.
+# Copia el código fuente de la aplicación
 COPY ./app /app/app
 
-# Expone el puerto en el que Uvicorn correrá la aplicación dentro del contenedor.
+# Expone el puerto 8000 para Uvicorn
 EXPOSE 8000
 
-# Comando para ejecutar la aplicación cuando el contenedor inicie.
-# Ejecuta Uvicorn, haciéndolo accesible desde fuera del contenedor en el host 0.0.0.0.
-# No se usa --reload aquí, ya que es para un entorno de ejecución, no desarrollo activo dentro del contenedor.
+# Comando por defecto para ejecutar Uvicorn
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
