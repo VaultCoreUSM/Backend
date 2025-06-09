@@ -4,6 +4,13 @@ sqlalchemy>=2.0.0
 psycopg2-binary>=2.9.0 # Adaptador PostgreSQL
 pydantic-settings>=2.0.0
 python-dotenv>=1.0.0
+
+# Render de PDF
+jinja2>=3.1.6 #para poder tener un Pdf dinamico
+pdfkit>=1.0.0 #poder crearlo el pdf
+weasyprint>=65.1
+#se usa la heramienta wkhtmltopdf para poder compilar el PDF es necesario para pdfkit
+
 # opencv-python-headless # Para procesamiento de video, si lo necesitas
 # numpy # Para OpenCV y manipulación de imágenes
 # alembic # Para migraciones de base de datos (recomendado para producción)

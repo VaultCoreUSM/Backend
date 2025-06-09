@@ -1,0 +1,21 @@
+
+<html>
+
+<body>
+    <div class="header">
+        <h1>{{ titulo }}</h1>
+        <p>Generado el: {{ fecha }}</p>
+    </div>
+
+    <div class="content">
+        {% for item in items %}
+        <div class="item">
+            <h3>{{ item.nombre }}</h3>
+            <p>Precio: ${{ item.precio }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+
+</body>
+</html>
